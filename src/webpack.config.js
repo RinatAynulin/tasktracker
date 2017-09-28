@@ -4,12 +4,12 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
     entry: {
-        app: './App.js',
+        index: './index.jsx',
     },
     context: `${__dirname}/static_src`,
     output: {
         path: `${__dirname}/static/build`,
-        filename: '[name].js',
+        filename: NODE_ENV == 'development' ? '[name].js' : '[hash].js',
         publicPath: '/static/build/',
     },
 
@@ -20,9 +20,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 include: `${__dirname}/static_src`,
-                loader: 'babel-loader?presets[]=es2015',
+                loader: 'babel-loader?presets[]=react&presets[]=es2015&presets[]=stage-0'
             },
             {
                 test: /\.css$/,
@@ -35,13 +35,19 @@ module.exports = {
         ],
     },
 
+    resolve: {
+      modules: [
+        `${__dirname}/static_src`, 'node_modules'
+      ],
+      extensions: ['.js', '.jsx'],
+    },
+
     // devtool: NODE_ENV === 'development' ? 'cheap-module-source-map' : false,
 
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
     ],
 };
-
 
 if (NODE_ENV !== 'development') {
     module.exports.plugins.push(
