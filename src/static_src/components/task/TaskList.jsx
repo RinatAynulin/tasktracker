@@ -6,24 +6,28 @@ import statusMapping from './../../constants/statusMapping'
 
 import './../../styles.css';
 
+import { connect } from 'react-redux';
 
 class TaskList extends React.Component {
 
 	static propTypes = {
 		listName: PropTypes.string,
-		taskList: PropTypes.arrayOf(PropTypes.shape(Task.propTypes)),
+		tasks: PropTypes.arrayOf(PropTypes.shape(Task.propTypes)),
 	}; 
 
 	static defaultProps = {
 		listName: '',
-		taskList: [],
+		tasks: [],
 	}
 
 
 	render() {
 		const status = statusMapping[this.props.listName];
-		const tasks = this.props.taskList.filter(task => task.status == status).map(
-			item => <Task key={item.id} task={item}/>
+		const tasks = this.props.tasks.map(
+			item => {
+				console.log(item);
+				return <Task key={item.id} task={item}/>;
+			}
 			);
 
 		return (
@@ -36,4 +40,23 @@ class TaskList extends React.Component {
 	}
 }
 
-export default TaskList;
+const mapStateToProps = ({ tasks }, ownProps) => {
+		const tasksToShow = [];
+		const status = statusMapping[ownProps.listName];
+		tasks.taskList.map(
+			taskId => {
+				let task = tasks.tasks[taskId];
+				if (task.status == status) {
+					tasksToShow.push(task);
+				}
+			});
+		return {
+			listName: ownProps.listName, 
+			tasks: tasksToShow,
+		};
+	// }
+};
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

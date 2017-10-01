@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TaskList from './TaskList';
-import Task from './Task';
+import { bindActionCreators, push } from 'redux';
+import { connect } from 'react-redux';
+import { loadTasks } from './../../actions/tasks';
+import apiUrls from './../../constants/apiUrls';
 
 import './../../styles.css';
 
@@ -12,14 +15,16 @@ class TaskBoard extends React.Component {
 
 	static propTypes = {
 		isLoading: PropTypes.bool,
-		listName: PropTypes.string,
-		taskList: PropTypes.arrayOf(PropTypes.shape(Task.propTypes)),
-	}; 
+		loadTasks: PropTypes.func.isRequired,
+	};
 
 	static defaultProps = {
-		listName: '',
 		isLoading: false,
-		taskList: [],
+	};
+
+	componentDidMount() {
+		console.log('task is going to be load');
+		this.props.loadTasks(apiUrls.task);
 	}
 
 	render() {
@@ -28,8 +33,8 @@ class TaskBoard extends React.Component {
 		}
 		const taskLists = listNames.map(
 			(listName, i) => (
-				<div align="center" className="task-board-row">
-					<TaskList key={i} listName={listName} taskList={this.props.taskList}/>
+				<div className="task-board-row">
+					<TaskList key={i} listName={listName}/>
 				</div>
 				)
 			);
@@ -41,4 +46,15 @@ class TaskBoard extends React.Component {
 	}
 }
 
-export default TaskBoard;
+const mapStateToProps = ({ tasks }) => {
+    return {
+        isLoading: tasks.isLoading,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ loadTasks }, dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskBoard);

@@ -12,6 +12,7 @@
 .header__auth {
 	float: right;
 	color: white;
+	padding-right: 5px;
 }
 
 
