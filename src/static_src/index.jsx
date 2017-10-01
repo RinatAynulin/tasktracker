@@ -8,13 +8,14 @@ import App from './components/App';
 import initStore from './utils/store';
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
-
+const historyMiddleware = routerMiddleware(history);
+const store = initStore([historyMiddleware]);
 ReactDOM.render(
-    <Provider store={ initStore([middleware]) }>
+    <Provider store={ store }>
         <ConnectedRouter history={ history }>
             <App />
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root'),
 );
+

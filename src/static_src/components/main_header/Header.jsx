@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { bindActionCreators, push } from 'redux';
+import { connect } from 'react-redux';
+import { loadTasks } from './../../actions/tasks';
+
 import Project from './../project/Project';
 
 import './../../styles.css';
@@ -46,4 +50,17 @@ class Header extends React.Component {
 	}
 }
 
-export default Header;
+const mapStateToProps = ({ auth }) => {
+    return {
+        isLoading: auth.user.isLoading,
+        currentUser: auth.user.user,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ loadTasks }, dispatch);
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

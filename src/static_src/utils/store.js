@@ -3,7 +3,7 @@ import initReducers from './../reducers';
 import middlewares from './../middlewares';
 
 function initStore(additionalMiddlewares = []) {
-    const innitialStore = {};
+	const innitialStore = {};
     return createStore(
         initReducers,
         innitialStore,
