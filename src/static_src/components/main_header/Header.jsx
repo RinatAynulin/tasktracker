@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 
 import { bindActionCreators, push } from 'redux';
 import { connect } from 'react-redux';
-import { loadTasks } from './../../actions/tasks';
-
+import { Link } from 'react-router-dom';
 import Project from './../project/Project';
 
 import './../../styles.css';
 
 class Header extends React.Component {
 	static propTypes = {
-		projectList: PropTypes.arrayOf(PropTypes.shape(Project.PropTypes)),
 		currentUser: PropTypes.shape({
 				id: PropTypes.number,
 				first_name: PropTypes.string,
@@ -23,15 +21,11 @@ class Header extends React.Component {
 	};
 
 	static defaultProps = {
-		projectList: [],
 		currentUser: {}
 	};
 
 	render() {
-		const projectName = this.props.projectList.length > 0 ? this.props.projectList[0].name : 'The Best Project Ever' ;
-		const projects = this.props.projectList.map(
-				(project) => <li key={project.id}><a href="#dummy">{project.name}</a></li>
-			);
+				
 		return (
 			<div className="header">
 				<div className="header__element">
@@ -39,7 +33,7 @@ class Header extends React.Component {
 				</div>
 				<div className="header__element">
 					<ul>
-						{projects}
+						<Link to="/projects">All projects</Link>
 					</ul>
 				</div>
 				<div className="header__auth">
@@ -57,9 +51,7 @@ const mapStateToProps = ({ auth }) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ loadTasks }, dispatch);
-}
+const mapDispatchToProps = () => {};
 
 
 
