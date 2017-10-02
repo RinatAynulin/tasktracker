@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Task from './Task';
+import TaskForm from './TaskForm';
 import statusMapping from './../../constants/statusMapping'
 
 import './../../styles.css';
 
-import { connect } from 'react-redux';
 
 class TaskList extends React.Component {
 
@@ -22,7 +23,6 @@ class TaskList extends React.Component {
 
 
 	render() {
-		const status = statusMapping[this.props.listName];
 		const tasks = this.props.tasks.map(
 			item => {
 				return <Task key={item.id} task={item}/>;
@@ -32,6 +32,8 @@ class TaskList extends React.Component {
 		return (
 			<div className="task-list">
 				<h2> {this.props.listName} </h2>
+				<TaskForm status={this.props.status} projectId={this.props.projectId}/>
+
 				{tasks}
 
 			</div>
@@ -39,7 +41,7 @@ class TaskList extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ tasks }, ownProps) => {
+const mapStateToProps = ({ tasks, projects }, ownProps) => {
 		const tasksToShow = [];
 		const status = statusMapping[ownProps.listName];
 		tasks.taskList.map(
@@ -52,6 +54,8 @@ const mapStateToProps = ({ tasks }, ownProps) => {
 		return {
 			listName: ownProps.listName, 
 			tasks: tasksToShow,
+			projectId: projects.selectedProject,
+			status,
 		};
 	// }
 };

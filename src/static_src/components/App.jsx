@@ -17,7 +17,6 @@ import ProjectPage from './project/ProjectPage';
 import Logout from './login/Logout';
 import PrivateRoute from './login/PrivateRoute';
 import Header from './main_header/Header';
-import ProjectHeader from './project_header/ProjectHeader';
 import { currentUser } from './../actions/auth';
 
 import './../styles.css';
@@ -69,13 +68,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="root-div">
-				<Link to="/login">Log in</Link>
-				<Link to="/logout"> Logout </Link>
 				<Header currentUser={this.state.currentUser} projectList={this.state.projectList}/>
-				<ProjectHeader projectList={this.state.projectList}/>
-				<Link to="/tasklist/">Список</Link>
-				<Link to="/projects">All projects</Link>
-                <h1>TaskTracker</h1>
                 <Switch>
                     <Route exact path="/" component={ () => <h2>Allo allo</h2> } />
                     <PrivateRoute exact path="/tasklist/" isAuthenticated={ this.props.isAuthenticated } component={ TaskBoard } />

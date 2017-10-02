@@ -1,11 +1,14 @@
 import update from 'react-addons-update';
-import { START_TASK_LOADING, SUCCESS_TASK_LOADING, ERROR_TASK_LOADING } from './../actions/tasks';
-
+import { START_TASK_LOADING, SUCCESS_TASK_LOADING, ERROR_TASK_LOADING, 
+        START_ADD_TASK, SUCCESS_ADD_TASK, ERROR_ADD_TASK} from './../actions/tasks';
 
 const initialState = {
     taskList: [],
     tasks: {},
     isLoading: false,
+    form: {
+        isLoading: false,
+    }
 };
 
 
@@ -32,6 +35,22 @@ export default function tasks(store = initialState, action) {
         case ERROR_TASK_LOADING: {
             return update(newStore, {
                 isLoading: { $set: false },
+            });
+        }
+        case START_ADD_TASK: {
+            return update(newStore, {
+                form: {isLoading: { $set: true }},
+            });
+        }
+        case SUCCESS_ADD_TASK: {
+            return update(newStore, {
+                form: {isLoading: { $set: false }},
+                taskList: { $push: action.payload.result },
+            });
+        }
+        case ERROR_ADD_TASK: {
+            return update(newStore, {
+                form: {isLoading: { $set: false }},
             });
         }
         default:

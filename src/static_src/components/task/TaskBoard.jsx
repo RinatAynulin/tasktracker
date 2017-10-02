@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import TaskList from './TaskList';
 import { bindActionCreators, push } from 'redux';
 import { connect } from 'react-redux';
+
+import TaskList from './TaskList';
+import ProjectHeader from './../project_header/ProjectHeader';
+
 import { loadTasks } from './../../actions/tasks';
 import apiUrls from './../../constants/apiUrls';
 
@@ -32,6 +34,9 @@ class TaskBoard extends React.Component {
 		if (this.props.isLoading) {
 			return <div className="task-board">Loading...</div>;
 		}
+		if (this.props.selectedProject <= 0) {
+			return <div className="task-board">Select project, pls</div>;
+		}
 		const taskLists = listNames.map(
 			(listName, i) => (
 				<div className="task-board-row">
@@ -40,8 +45,11 @@ class TaskBoard extends React.Component {
 				)
 			);
 		return (
-				<div className="task-board">
-						{taskLists}
+				<div>
+					<ProjectHeader/>
+					<div className="task-board">
+							{taskLists}
+					</div>
 				</div>
 			);
 	}
