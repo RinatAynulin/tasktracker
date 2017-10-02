@@ -25,7 +25,6 @@ class TaskList extends React.Component {
 		const status = statusMapping[this.props.listName];
 		const tasks = this.props.tasks.map(
 			item => {
-				console.log(item);
 				return <Task key={item.id} task={item}/>;
 			}
 			);
