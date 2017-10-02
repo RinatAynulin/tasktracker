@@ -9,10 +9,11 @@
 	float: left;
 }
 
-.header__auth {
+.header__element-right {
 	float: right;
 	color: white;
 	padding-right: 5px;
+	font-size: 25px;
 }
 
 

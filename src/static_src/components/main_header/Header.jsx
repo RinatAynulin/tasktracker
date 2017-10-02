@@ -31,13 +31,13 @@ class Header extends React.Component {
 				<div className="header__element">
 						<Link to="/projects">All projects</Link>
 				</div>
-				<div className="header__element">
+				<div className="header__element-right">
 						<Link to="/login">Log in</Link>
 				</div>
-				<div className="header__element">
+				<div className="header__element-right">
 						<Link to="/logout"> Logout </Link>
 				</div>
-				<div className="header__auth">
+				<div className="header__element-right">
 					{currentUser}
 				</div>
 			</div>
