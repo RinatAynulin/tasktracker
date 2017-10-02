@@ -3,11 +3,13 @@ import { routerReducer } from 'react-router-redux';
 import tasks from './tasks';
 import projects from './projects';
 import auth from './auth';
+import users from './users';
 
 const appReducer = combineReducers({
 	routerReducer,
 	tasks,
 	projects,
+	users,
 	auth
 });
 

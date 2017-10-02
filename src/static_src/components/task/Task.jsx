@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import User from './../user/User';
 import './../../styles.css';
 
 class Task extends React.Component {
@@ -21,6 +22,7 @@ class Task extends React.Component {
 				<div className="task">
 					<div className="task__header">
 						<div className="task__header-text">{ this.props.task.text }</div>
+						<div className="task__header-user"> <User id={this.props.task.author}/> </div>
 					</div>
 					<div className="task__content">
 						<div className="task__content-description">{ this.props.task.description }</div>
