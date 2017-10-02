@@ -13,6 +13,7 @@ import apiUrls from './../constants/apiUrls';
 import {getToken} from './../utils/utils';
 import TaskBoard from './task/TaskBoard';
 import LoginPage from './login/LoginPage';
+import ProjectPage from './project/ProjectPage';
 import Logout from './login/Logout';
 import Header from './main_header/Header';
 import ProjectHeader from './project_header/ProjectHeader';
@@ -72,10 +73,12 @@ class App extends React.Component {
 				<Header currentUser={this.state.currentUser} projectList={this.state.projectList}/>
 				<ProjectHeader projectList={this.state.projectList}/>
 				<Link to="/tasklist/">Список</Link>
+				<Link to="/projects">All projects</Link>
                 <h1>TaskTracker</h1>
                 <Switch>
                     <Route exact path="/" component={ () => <h2>jhdfbg</h2> } />
                     <Route exact path="/tasklist/" component={ TaskBoard } />
+                    <Route exact path="/projects/" component={ ProjectPage } />
                     <Route exact path="/login/" component= { LoginPage } />
                     <Route exact path="/logout" component = { Logout } />
                 </Switch>

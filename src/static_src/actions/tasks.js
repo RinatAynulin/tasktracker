@@ -2,7 +2,7 @@ import { CALL_API, getJSON } from 'redux-api-middleware';
 import { normalize } from 'normalizr';
 
 import { task } from './../utils/schemas';
-
+import { getToken } from './../utils/utils';
 export const START_TASK_LOADING = 'START_TASK_LOADING';
 export const SUCCESS_TASK_LOADING = 'SUCCESS_TASK_LOADING';
 export const ERROR_TASK_LOADING = 'ERROR_TASK_LOADING';
@@ -14,7 +14,7 @@ export const loadTasks = (url) => {
             credentials: 'include',
             endpoint: url,
             method: 'GET',
-            headers: {Authorization: 'Token 55b7d59a965819fa983a7328e6893b334ded67f6'},
+            headers: {Authorization: getToken()},
             types: [
                 START_TASK_LOADING,
                 {

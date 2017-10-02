@@ -1,29 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import './../../styles.css';
+// import User from './User';
+
 
 class Task extends React.Component {
-	static propTypes = {
-		task: PropTypes.shape({
-			id: PropTypes.number,
-			name: PropTypes.string,
-			author: PropTypes.shape({
-				id: PropTypes.number,
-				first_name: PropTypes.string,
-				last_name: PropTypes.string,
-				avatar: PropTypes.string,
-			}),
-		}),
-	};
+    static propTypes = {
+        id: PropTypes.number.isRequired,
+        author: PropTypes.number,
+        name: PropTypes.string,
+        created_at: PropTypes.string,
+    }
 
-	render() {
-		return (
-				<div className="project">
+    static defaultProps = {
+        author: null,
+        name: '',
+        created_at: '',
+    }
 
-				</div>
-			);
-	}
+    render() {
+        return (
+            <div className="project">
+                <div className="project__content">{ this.props.name }</div>
+            </div>
+        );
+    }
 }
 
-export default Task;
+
+const mapStateToProps = ({ projects }, ownProps) => {
+    return {
+        ...projects.projects[ownProps.id],
+    };
+};
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Task);
