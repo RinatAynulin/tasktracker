@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Project from './../project/Project';
 import './../../styles.css';
 
 class ProjectHeader extends React.Component {
 	static propTypes = {
-		projectList: PropTypes.arrayOf(PropTypes.shape(Project.PropTypes)),
+		project: PropTypes.shape(Project.PropTypes),
 	};
 
 	static defaultProps = {
-		projectList: [],
+		project: {},
 	};
 
 	render() {
-		const projectName = this.props.projectList.length > 0 ? this.props.projectList[0].name : 'The Best Project Ever' ;
+		let projectName = '';
+		if (this.props.project) {
+			projectName = this.props.project.name;
+		}
 		return (
 			<div className="project-header">
 				<a className="project-header__name"> {projectName} </a>
@@ -23,4 +27,13 @@ class ProjectHeader extends React.Component {
 	}
 }
 
-export default ProjectHeader;
+const mapStateToProps = ({ tasks, projects }) => {
+    return {
+        project: projects.projects[projects.selectedProject],
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectHeader);

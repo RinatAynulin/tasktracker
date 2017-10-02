@@ -13,6 +13,8 @@ export const START_ADD_PROJECT = 'START_ADD_PROJECT';
 export const SUCCESS_ADD_PROJECT = 'SUCCESS_ADD_PROJECT';
 export const ERROR_ADD_PROJECT = 'ERROR_ADD_PROJECT';
 
+export const SELECT_PROJECT = 'SELECT_PROJECT';
+
 export const loadProjects = (page) => {
     return {
         [CALL_API]: {
@@ -73,6 +75,13 @@ export const addProject = (body) => {
         },
     };
 };
+
+export const selectProject = (selectedProject) => {
+    return {
+        type: SELECT_PROJECT,
+        selectedProject,
+    }
+}
 
 
 

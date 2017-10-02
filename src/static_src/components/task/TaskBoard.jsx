@@ -16,6 +16,7 @@ class TaskBoard extends React.Component {
 	static propTypes = {
 		isLoading: PropTypes.bool,
 		loadTasks: PropTypes.func.isRequired,
+		selectedProject: PropTypes.number,
 	};
 
 	static defaultProps = {
@@ -24,7 +25,7 @@ class TaskBoard extends React.Component {
 
 	componentDidMount() {
 		console.log('task is going to be load');
-		this.props.loadTasks(apiUrls.task);
+		this.props.loadTasks(apiUrls.task + `?project=${this.props.selectedProject}`);
 	}
 
 	render() {
@@ -46,9 +47,10 @@ class TaskBoard extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ tasks }) => {
+const mapStateToProps = ({ tasks, projects }) => {
     return {
         isLoading: tasks.isLoading,
+        selectedProject: projects.selectedProject,
     }
 }
 

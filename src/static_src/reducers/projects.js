@@ -1,12 +1,13 @@
 import update from 'react-addons-update';
 import { START_PROJECT_LOADING, SUCCESS_PROJECT_LOADING, ERROR_PROJECT_LOADING,
-        START_ADD_PROJECT, SUCCESS_ADD_PROJECT, ERROR_ADD_PROJECT } from './../actions/projects';
+        START_ADD_PROJECT, SUCCESS_ADD_PROJECT, ERROR_ADD_PROJECT, SELECT_PROJECT } from './../actions/projects';
 
 
 const initialState = {
     projectList: [],
     projects: {},
     isLoading: false,
+    selectedProject: 0,
     size: 0,
     previous: '',
     next: '',
@@ -56,6 +57,11 @@ export default function projects(store = initialState, action) {
         case ERROR_ADD_PROJECT: {
             return update(newStore, {
                 isLoading: { $set: false },
+            });
+        }
+        case SELECT_PROJECT: {
+            return update(newStore, {
+                selectedProject: { $set: action.selectedProject },
             });
         }
         default:
