@@ -7,6 +7,9 @@ const initialState = {
     projectList: [],
     projects: {},
     isLoading: false,
+    size: 0,
+    previous: '',
+    next: '',
 };
 
 
@@ -25,9 +28,13 @@ export default function projects(store = initialState, action) {
             });
         }
         case SUCCESS_PROJECT_LOADING: {
+            console.log(action);
             return update(newStore, {
                 isLoading: { $set: false },
                 projectList: { $set: action.payload.result },
+                size: { $set: action.payload.count },
+                previous: { $set: action.payload.previous },
+                next: { $set: action.payload.next },
             });
         }
         case ERROR_PROJECT_LOADING: {
@@ -41,7 +48,6 @@ export default function projects(store = initialState, action) {
             });
         }
         case SUCCESS_ADD_PROJECT: {
-            console.log(action.payload);
             return update(newStore, {
                 isLoading: { $set: false },
                 projectList: { $push: action.payload.result },

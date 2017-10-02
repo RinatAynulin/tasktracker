@@ -53,9 +53,9 @@ class ProjectForm extends React.Component {
     }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ projects }) => {
         return {
-            isLoading: auth.isLoading,
+            isLoading: projects.isLoading,
         };
     // }
 };

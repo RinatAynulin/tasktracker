@@ -5,6 +5,7 @@ import { bindActionCreators, push } from 'redux';
 import { connect } from 'react-redux';
 import { loadProjects } from './../../actions/projects';
 import Project from './Project';
+import Pagination from './../pagination/Pagination';
 import './../../styles.css';
 
 class ProjectList extends React.Component {
@@ -12,6 +13,9 @@ class ProjectList extends React.Component {
 	static propTypes = {
 		isLoading: PropTypes.bool,
 		projectList: PropTypes.arrayOf(PropTypes.number),
+		size: PropTypes.number,
+		previous: PropTypes.string,
+		next: PropTypes.string,
 		loadProjects: PropTypes.func.isRequired,
 	};
 
@@ -21,7 +25,7 @@ class ProjectList extends React.Component {
 	};
 
 	componentDidMount() {
-		this.props.loadProjects();
+		this.props.loadProjects(1);
 	}
 
 	render() {
@@ -33,6 +37,13 @@ class ProjectList extends React.Component {
 				<Project key={projectId} id={projectId}/>
 				)
 			);
+		const pagination = <div className="pagination"></div>;
+		if (this.props.previous || this.props.next) {
+			const pagination = (
+				<div className="pagination">
+					<Pagination size={ this.props.size } previous={ this.props.previous } next={ this.props.next }/>
+				</div>);
+		}
 		return (
 				<div className="project-list">
 						{projects}
@@ -45,6 +56,9 @@ const mapStateToProps = ({ projects }) => {
     return {
         isLoading: projects.isLoading,
         projectList: projects.projectList,
+        size: projects.size,
+        previous: projects.previous,
+        next: projects.next,
     }
 }
 
