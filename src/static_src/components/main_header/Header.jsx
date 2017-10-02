@@ -25,7 +25,7 @@ class Header extends React.Component {
 	};
 
 	render() {
-				
+		const currentUser = (typeof this.props.currentUser == undefined) ? <p> {this.props.currentUser.first_name + ' ' + this.props.currentUser.last_name} </p> : <p>Anonymous</p>;
 		return (
 			<div className="header">
 				<div className="header__element">
@@ -37,7 +37,7 @@ class Header extends React.Component {
 					</ul>
 				</div>
 				<div className="header__auth">
-					<p> {this.props.currentUser.first_name + ' ' + this.props.currentUser.last_name} </p>
+					{currentUser}
 				</div>
 			</div>
 			);

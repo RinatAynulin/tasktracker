@@ -94,7 +94,7 @@ const mapStateToProps = ({ auth }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return Object.assign({}, bindActionCreators({ login }, dispatch), 
-        {redirect: () => (dispatch(push('/tasklist')))});
+        {redirect: () => (dispatch(push('/projects')))});
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

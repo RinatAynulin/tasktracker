@@ -7,7 +7,7 @@ import { push } from 'react-router-redux';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 
 import apiUrls from './../constants/apiUrls';
 import {getToken} from './../utils/utils';
@@ -15,6 +15,7 @@ import TaskBoard from './task/TaskBoard';
 import LoginPage from './login/LoginPage';
 import ProjectPage from './project/ProjectPage';
 import Logout from './login/Logout';
+import PrivateRoute from './login/PrivateRoute';
 import Header from './main_header/Header';
 import ProjectHeader from './project_header/ProjectHeader';
 import { currentUser } from './../actions/auth';
@@ -76,11 +77,11 @@ class App extends React.Component {
 				<Link to="/projects">All projects</Link>
                 <h1>TaskTracker</h1>
                 <Switch>
-                    <Route exact path="/" component={ () => <h2>jhdfbg</h2> } />
-                    <Route exact path="/tasklist/" component={ TaskBoard } />
-                    <Route exact path="/projects/" component={ ProjectPage } />
-                    <Route exact path="/login/" component= { LoginPage } />
-                    <Route exact path="/logout" component = { Logout } />
+                    <Route exact path="/" component={ () => <h2>Allo allo</h2> } />
+                    <PrivateRoute exact path="/tasklist/" isAuthenticated={ this.props.isAuthenticated } component={ TaskBoard } />
+                    <PrivateRoute exact path="/projects/" isAuthenticated={ this.props.isAuthenticated }component={ ProjectPage } />
+                    <Route exact path="/login/" component= { LoginPage }/>
+                    <Route exact path="/logout/" component = { Logout }/>
                 </Switch>
 			</div>
 			);
