@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import apiUrls from './../../constants/apiUrls';
-import { login } from './../../actions/auth';
+import { login, currentUser } from './../../actions/auth';
 
 class LoginForm extends React.Component {
     static propTypes = {
@@ -33,28 +33,8 @@ class LoginForm extends React.Component {
         const body = JSON.stringify(this.state);
 
         console.log(`login request with body ${body}`);
-        // let body = new FormData();
-        // body.append('username', this.state.login);
-        // body.append('password', this.state.password);
 
-        this.props.login(body);
-
-        // this.setState({ isLoading: true });
-        // fetch(apiUrls.task, {
-        //     method: 'POST',
-        //     credentials: 'include',
-        //     body: JSON.stringify(this.state),
-        //     headers: {
-        //         'content-type': 'application/json',
-        //     }
-        // }).then(
-        //     body => body.json(),
-        // ).then(
-        //     (json) => {
-        //         this.setState({ isLoading: false });
-        //         return this.props.onCreate(json);
-        //     },
-        // )
+        this.props.login(body).then(() => this.props.currentUser());
     }
 
     render() {
@@ -93,7 +73,7 @@ const mapStateToProps = ({ auth }) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return Object.assign({}, bindActionCreators({ login }, dispatch), 
+    return Object.assign({}, bindActionCreators({ login, currentUser }, dispatch), 
         {redirect: () => (dispatch(push('/projects')))});
 };
 
