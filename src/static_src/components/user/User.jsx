@@ -29,7 +29,7 @@ class User extends React.Component {
         return (
             <div className="user">
                 <div className="user__name"> { this.props.first_name + this.props.last_name } </div>
-                <div className="user__avatar"> <img src={this.props.avatar}/> </div>
+                <div className="user__avatar"> <img src={this.props.avatar} alt="No avatar"/> </div>
             </div>
         );
     }

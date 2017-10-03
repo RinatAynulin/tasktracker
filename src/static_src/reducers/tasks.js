@@ -1,6 +1,7 @@
 import update from 'react-addons-update';
 import { START_TASK_LOADING, SUCCESS_TASK_LOADING, ERROR_TASK_LOADING, 
-        START_ADD_TASK, SUCCESS_ADD_TASK, ERROR_ADD_TASK} from './../actions/tasks';
+        START_ADD_TASK, SUCCESS_ADD_TASK, ERROR_ADD_TASK,
+        START_CHANGE_STATUS, SUCCESS_CHANGE_STATUS, ERROR_CHANGE_STATUS} from './../actions/tasks';
 
 const initialState = {
     taskList: [],

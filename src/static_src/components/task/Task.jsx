@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import ChangeStatus from './ChangeStatus';
 import User from './../user/User';
 import './../../styles.css';
 
@@ -26,6 +27,9 @@ class Task extends React.Component {
 					</div>
 					<div className="task__content">
 						<div className="task__content-description">{ this.props.task.description }</div>
+					</div>
+					<div className="task__change-status">
+						<ChangeStatus taskId={this.props.task.id}/>
 					</div>
 				</div>
 			);

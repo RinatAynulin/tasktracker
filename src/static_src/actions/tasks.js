@@ -12,6 +12,10 @@ export const START_ADD_TASK = 'START_ADD_TASK';
 export const SUCCESS_ADD_TASK = 'SUCCESS_ADD_TASK';
 export const ERROR_ADD_TASK = 'ERROR_ADD_TASK';
 
+export const START_CHANGE_STATUS = 'START_CHANGE_STATUS';
+export const SUCCESS_CHANGE_STATUS = 'SUCCESS_CHANGE_STATUS';
+export const ERROR_CHANGE_STATUS = 'ERROR_CHANGE_STATUS';
+
 import apiUrls from './../constants/apiUrls';
 
 export const loadTasks = (url) => {
@@ -74,7 +78,38 @@ export const addTask = (body) => {
     };
 };
 
-
+export const changeStatus = (taskId, body) => {
+    return {
+        [CALL_API]: {
+            credentials: 'include',
+            endpoint: apiUrls.task + `${taskId}/`,
+            method: 'PUT',
+            body,
+            headers: { 
+                'Authorization': getToken(),
+                'Content-type': 'application/json' 
+            },
+            types: [
+                START_CHANGE_STATUS,
+                {
+                    type: SUCCESS_CHANGE_STATUS,
+                    payload: (action, state, res) => {
+                        return getJSON(res).then(
+                            (json) => {
+                                json = {tasks: json};
+                                const normalizedData = normalize(json, [task]);
+                                console.log(normalizedData);
+                                delete json.results;
+                                return Object.assign({}, json, normalizedData);
+                            },
+                        );
+                    },
+                },
+                ERROR_CHANGE_STATUS,
+            ],
+        },
+    };
+};
 
 
 
