@@ -38,26 +38,8 @@ class App extends React.Component {
 
 	componentDidMount() {
 		this.setState({isLoading: true});
-
-		fetch(apiUrls.project, {
-		  method: "GET",
-		  headers: {
-		    Authorization: 'Token 55b7d59a965819fa983a7328e6893b334ded67f6'
-		  }	}).then(
-			(body) => body.json()
-		).then((json) => this.setState({projectList: json.results})); // fixme
-
-		fetch(apiUrls.task, {
-		  method: "GET",
-		  headers: {
-		    Authorization: 'Token 55b7d59a965819fa983a7328e6893b334ded67f6'
-		  }	}).then(
-			(body) => body.json()
-		).then((json) => this.setState({isLoading: false, taskList: json.results})); 
 	}
-// 
-				// <TaskBoard isLoading={this.state.isLoading} taskList={this.state.taskList}/>
-
+	
 	componentWillMount() {
 		if (!this.props.isAuthenticated) {
 			this.props.redirectToLogin();

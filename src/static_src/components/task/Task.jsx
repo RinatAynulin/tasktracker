@@ -25,9 +25,9 @@ class Task extends React.Component {
 	render() {
 		console.log(this.props);
 		return (
-				<div className="task" onClick={() => this.props.openModal(this.props.task.id)}>
+				<div className="task">
 					<div className="task__header">
-						<div className="task__header-text">{ this.props.task.text }</div>
+						<div className="task__header-text" onClick={() => this.props.openModal(this.props.task.id)}>{ this.props.task.text }</div>
 						<div className="task__header-user"> <User id={this.props.task.author}/> </div>
 					</div>
 					<div className="task__content">

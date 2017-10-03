@@ -24,27 +24,20 @@ class ChangeStatus extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    onClick = (status) => {
-        // e.preventDefault();
-        // if (this.props.isLoading) {
-        //     return;
-        // }
-
+    onClick = (event, status) => {
         const body = JSON.stringify({
             taskId: this.props.taskId, 
             status, 
             project_id: this.props.project_id, 
             text: this.props.text});
 
-        // this.props.addTask(body);
-        // this.setState({text: '', description: '',})
         this.props.changeStatus(this.props.taskId, body)
-        console.log(status);
+        return false;
     }
 
     render() {
         const statuses = STATUS_LIST.map(
-            (status) => <li key={statusMapping[status]}><a onClick={()=>this.onClick(statusMapping[status])}>{status}</a></li>
+            (status) => <li key={statusMapping[status]}><a onClick={(e)=>this.onClick(event, statusMapping[status])}>{status}</a></li>
         );
         return (
             <div className="task-form">
