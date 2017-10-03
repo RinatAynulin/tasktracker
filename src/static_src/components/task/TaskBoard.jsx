@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators, push } from 'redux';
 import { connect } from 'react-redux';
+import ReactModal from 'react-modal';
 
 import TaskList from './TaskList';
+import Task from './Task';
 import ProjectHeader from './../project_header/ProjectHeader';
 
+import { closeModal } from './../../actions/taskModal';
 import { loadTasks } from './../../actions/tasks';
+
 import apiUrls from './../../constants/apiUrls';
 
 import './../../styles.css';
@@ -47,6 +51,11 @@ class TaskBoard extends React.Component {
 		return (
 				<div>
 					<ProjectHeader/>
+					<ReactModal className="modal-content" isOpen={this.props.showModal} onRequestClose={this.props.closeModal} contentLabel="Minimal Modal Example">
+
+                      	  <Task task={this.props.selectedTask}/>
+
+                    </ReactModal>
 					<div className="task-board">
 							{taskLists}
 					</div>
@@ -55,15 +64,17 @@ class TaskBoard extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ tasks, projects }) => {
+const mapStateToProps = ({ tasks, projects, taskModal }) => {
     return {
         isLoading: tasks.isLoading,
         selectedProject: projects.selectedProject,
+        showModal: taskModal.showModal,
+        selectedTask: tasks.tasks[taskModal.selectedTask],
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ loadTasks }, dispatch);
+    return bindActionCreators({ loadTasks, closeModal }, dispatch);
 }
 
 

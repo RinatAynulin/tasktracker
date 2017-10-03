@@ -4,12 +4,14 @@ import tasks from './tasks';
 import projects from './projects';
 import auth from './auth';
 import users from './users';
+import taskModal from './taskModal';
 
 const appReducer = combineReducers({
 	routerReducer,
 	tasks,
 	projects,
 	users,
+	taskModal,
 	auth
 });
 
