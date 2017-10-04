@@ -31,13 +31,13 @@ class TaskBoard extends React.Component {
 
 	componentDidMount() {
 		console.log('task is going to be load');
-		this.props.loadTasks(apiUrls.task + `?project=${this.props.selectedProject}`);
+		this.props.loadTasks(apiUrls.task + `?project=${this.props.selectedProject}`, false);
 	}
 
 	render() {
-		if (this.props.isLoading) {
-			return <div className="task-board">Loading...</div>;
-		}
+		// if (this.props.isLoading) {
+		// 	return <div className="task-board">Loading...</div>;
+		// }
 		if (this.props.selectedProject <= 0) {
 			return <div className="task-board">Select project, pls</div>;
 		}

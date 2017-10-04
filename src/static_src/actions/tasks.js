@@ -18,7 +18,7 @@ export const ERROR_CHANGE_STATUS = 'ERROR_CHANGE_STATUS';
 
 import apiUrls from './../constants/apiUrls';
 
-export const loadTasks = (url) => {
+export const loadTasks = (url, addTasks) => {
     return {
         [CALL_API]: {
             credentials: 'include',
@@ -34,7 +34,7 @@ export const loadTasks = (url) => {
                             (json) => {
                                 const normalizedData = normalize(json.results, [task]);
                                 delete json.results;
-                                return Object.assign({}, json, normalizedData);
+                                return Object.assign({}, json, normalizedData, {addTasks});
                             },
                         );
                     },

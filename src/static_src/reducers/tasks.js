@@ -28,10 +28,19 @@ export default function tasks(store = initialState, action) {
             });
         }
         case SUCCESS_TASK_LOADING: {
-            return update(newStore, {
-                isLoading: { $set: false },
-                taskList: { $set: action.payload.result },
-            });
+            console.log(action.payload);
+            console.log(`addTasks? ${action.payload.addTasks}`);
+            if (action.payload.addTasks) {
+                return update(newStore, {
+                    isLoading: { $set: false },
+                    taskList: { $push: action.payload.result },
+                });
+            } else {
+                return update(newStore, {
+                    isLoading: { $set: false },
+                    taskList: { $set: action.payload.result },
+                });
+            }
         }
         case ERROR_TASK_LOADING: {
             return update(newStore, {
