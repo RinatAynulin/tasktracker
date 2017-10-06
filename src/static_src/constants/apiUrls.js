@@ -1,6 +1,7 @@
 export const PAGE_SIZE = {
 	task: 10,
 	comment: 10,
+	project: 10,
 };
 
 export default {

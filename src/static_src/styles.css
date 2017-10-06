@@ -105,6 +105,11 @@
 	max-height: 60vh;
 }
 
+.project-list {
+	overflow-y: scroll;
+	max-height: 60vh;
+}
+
 .root-div {
 	background-color: #FFD735;
 	min-height: 100vh;

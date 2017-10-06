@@ -15,7 +15,7 @@ export const ERROR_ADD_PROJECT = 'ERROR_ADD_PROJECT';
 
 export const SELECT_PROJECT = 'SELECT_PROJECT';
 
-export const loadProjects = (page) => {
+export const loadProjects = (page, addProjects) => {
     return {
         [CALL_API]: {
             credentials: 'include',
@@ -31,7 +31,7 @@ export const loadProjects = (page) => {
                             (json) => {
                                 const normalizedData = normalize(json.results, [project]);
                                 delete json.results;
-                                return Object.assign({}, json, normalizedData);
+                                return Object.assign({}, json, normalizedData, {addProjects});
                             },
                         );
                     },

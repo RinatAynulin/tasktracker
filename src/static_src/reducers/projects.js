@@ -29,15 +29,19 @@ export default function projects(store = initialState, action) {
             });
         }
         case SUCCESS_PROJECT_LOADING: {
-            console.log(action);
-            return update(newStore, {
-                isLoading: { $set: false },
-                projectList: { $set: action.payload.result },
-                size: { $set: action.payload.count },
-                previous: { $set: action.payload.previous },
-                next: { $set: action.payload.next },
-            });
+             if (action.payload.addProjects) {
+                return update(newStore, {
+                    isLoading: { $set: false },
+                    projectList: { $push: action.payload.result },
+                });
+            } else {
+                return update(newStore, {
+                    isLoading: { $set: false },
+                    projectList: { $set: action.payload.result },
+                });
+            }   
         }
+
         case ERROR_PROJECT_LOADING: {
             return update(newStore, {
                 isLoading: { $set: false },

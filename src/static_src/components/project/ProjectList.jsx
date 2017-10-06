@@ -5,7 +5,7 @@ import { bindActionCreators, push } from 'redux';
 import { connect } from 'react-redux';
 import { loadProjects } from './../../actions/projects';
 import Project from './Project';
-import Pagination from './../pagination/Pagination';
+import { PAGE_SIZE } from './../../constants/apiUrls';
 import './../../styles.css';
 
 class ProjectList extends React.Component {
@@ -24,8 +24,28 @@ class ProjectList extends React.Component {
 		projectList: [],
 	};
 
+
+	onScroll = (e) => {
+		if (this.props.isLoading) {
+			return;
+		}
+		let loadNext = e.target.scrollTop + e.target.offsetHeight == e.target.scrollHeight;
+		if (loadNext) {
+			let page = Math.ceil(this.props.projectList.length / PAGE_SIZE.project) + 1;
+			this.props.loadProjects(page, true);
+		}
+	}
+
+	onClick = (e) => {
+		if (this.props.isLoading) {
+			return;
+		}
+		let page = Math.ceil(this.props.projectList.length / PAGE_SIZE.project) + 1;
+		this.props.loadProjects(page, true);
+	}
+
 	componentDidMount() {
-		this.props.loadProjects(1);
+		this.props.loadProjects(1, false);
 	}
 
 	render() {
@@ -37,16 +57,11 @@ class ProjectList extends React.Component {
 				<Project key={projectId} id={projectId}/>
 				)
 			);
-		const pagination = <div className="pagination"></div>;
-		if (this.props.previous || this.props.next) {
-			const pagination = (
-				<div className="pagination">
-					<Pagination size={ this.props.size } previous={ this.props.previous } next={ this.props.next }/>
-				</div>);
-		}
+		
 		return (
-				<div className="project-list">
+				<div className="project-list" onScroll={this.onScroll}>
 						{projects}
+						<button onClick={this.onClick}>Load more</button>
 				</div>
 			);
 	}
