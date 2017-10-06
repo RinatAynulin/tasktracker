@@ -6,6 +6,7 @@ import ReactModal from 'react-modal';
 
 import TaskList from './TaskList';
 import Task from './Task';
+import CommentList from './../comment/CommentList';
 import ProjectHeader from './../project_header/ProjectHeader';
 
 import { closeModal } from './../../actions/taskModal';
@@ -54,6 +55,7 @@ class TaskBoard extends React.Component {
 					<ReactModal className="modal-content" isOpen={this.props.showModal} onRequestClose={this.props.closeModal} contentLabel="Minimal Modal Example">
 
                       	  <Task task={this.props.selectedTask}/>
+                      	  <CommentList/>
 
                     </ReactModal>
 					<div className="task-board">

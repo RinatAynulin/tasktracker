@@ -11,3 +11,8 @@ export const task = new schema.Entity('tasks', {
     author: user,
     project,
 });
+
+export const comment = new schema.Entity('comments', {
+	author: user,
+	task: task,
+});

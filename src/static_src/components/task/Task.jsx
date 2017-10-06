@@ -23,7 +23,6 @@ class Task extends React.Component {
 	};
 
 	render() {
-		console.log(this.props);
 		return (
 				<div className="task">
 					<div className="task__header">

@@ -4,6 +4,7 @@ import tasks from './tasks';
 import projects from './projects';
 import auth from './auth';
 import users from './users';
+import comments from './comments';
 import taskModal from './taskModal';
 
 const appReducer = combineReducers({
@@ -11,6 +12,7 @@ const appReducer = combineReducers({
 	tasks,
 	projects,
 	users,
+	comments,
 	taskModal,
 	auth
 });

@@ -100,6 +100,11 @@
 	max-height: 60vh;
 }
 
+.comment-list {
+	overflow-y: scroll;
+	max-height: 60vh;
+}
+
 .root-div {
 	background-color: #FFD735;
 	min-height: 100vh;
@@ -125,6 +130,12 @@
 
 .task__header-user {
 	font-size: 10px;
+}
+
+
+.comment {
+	border: 1px solid black;
+	margin: 5px;
 }
 
 .user__avatar img {
