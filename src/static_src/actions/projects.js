@@ -63,7 +63,6 @@ export const addProject = (body) => {
                             (json) => {
                                 json = {projects: json};
                                 const normalizedData = normalize(json, [project]);
-                                console.log(normalizedData);
                                 delete json.results;
                                 return Object.assign({}, json, normalizedData);
                             },

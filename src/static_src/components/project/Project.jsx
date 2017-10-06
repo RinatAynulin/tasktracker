@@ -28,10 +28,11 @@ class Project extends React.Component {
     }
 
     render() {
+        let link = `/taskList/${this.props.id}`;
         return (
             <div className="project">
                 <div className="project__content">
-                    <Link to="/taskList" onClick={ this.onClick }>{ this.props.name }</Link>
+                    <Link to={link} onClick={ this.onClick }>{ this.props.name }</Link>
                 </div>
             </div>
         );

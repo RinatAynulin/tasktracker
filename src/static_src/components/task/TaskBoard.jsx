@@ -11,6 +11,7 @@ import ProjectHeader from './../project_header/ProjectHeader';
 
 import { closeModal } from './../../actions/taskModal';
 import { loadTasks } from './../../actions/tasks';
+import { selectProject } from './../../actions/projects';
 
 import apiUrls from './../../constants/apiUrls';
 
@@ -26,13 +27,13 @@ class TaskBoard extends React.Component {
 		selectedProject: PropTypes.number,
 	};
 
-	static defaultProps = {
-		isLoading: false,
-	};
+	constructor(props) {
+		super(props);
+	}
 
-	componentDidMount() {
-		console.log('task is going to be load');
-		this.props.loadTasks(apiUrls.task + `?project=${this.props.selectedProject}`, false);
+	componentWillMount() {
+		this.props.selectProject(this.props.match.params.projectId);
+		this.props.loadTasks(apiUrls.task + `?project=${this.props.match.params.projectId}`, false);
 	}
 
 	render() {
@@ -76,7 +77,7 @@ const mapStateToProps = ({ tasks, projects, taskModal }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ loadTasks, closeModal }, dispatch);
+    return bindActionCreators({ loadTasks, closeModal, selectProject }, dispatch);
 }
 
 

@@ -52,9 +52,8 @@ class App extends React.Component {
 			<div className="root-div">
 				<Header currentUser={this.state.currentUser} projectList={this.state.projectList}/>
                 <Switch>
-                    <Route exact path="/" component={ () => <h2>Allo allo</h2> } />
-                    <PrivateRoute exact path="/tasklist/" isAuthenticated={ this.props.isAuthenticated } component={ TaskBoard } />
-                    <PrivateRoute exact path="/projects/" isAuthenticated={ this.props.isAuthenticated }component={ ProjectPage } />
+                    <PrivateRoute path="/tasklist/:projectId" isAuthenticated={ this.props.isAuthenticated } component={ TaskBoard } />
+                    <PrivateRoute exact path="/" isAuthenticated={ this.props.isAuthenticated } component={ ProjectPage } />
                     <Route exact path="/login/" component= { LoginPage }/>
                     <Route exact path="/logout/" component = { Logout }/>
                 </Switch>
@@ -74,6 +73,7 @@ const mapStateToProps = ({ auth }) => {
 const mapDispatchToProps = (dispatch) => {
     return Object.assign({
     	redirectToLogin: () => dispatch(push('/login')),
+    	redirectToProjects: () => dispatch(push('/projects')),
     }, bindActionCreators({ currentUser }, dispatch));
 };
 

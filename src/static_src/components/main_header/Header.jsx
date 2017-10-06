@@ -29,7 +29,7 @@ class Header extends React.Component {
 					<a href="/"> TSKTRCKR </a>
 				</div>
 				<div className="header__element">
-						<Link to="/projects">All projects</Link>
+						<Link to="/">All projects</Link>
 				</div>
 				<div className="header__element-right">
 						<Link to="/login">Log in</Link>
