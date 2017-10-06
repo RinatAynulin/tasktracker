@@ -35,7 +35,6 @@ class TaskForm extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(`Props: ${props.status}`);
         this.state = {
             text: '',
             description: '',

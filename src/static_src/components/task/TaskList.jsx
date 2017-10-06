@@ -30,10 +30,8 @@ class TaskList extends React.Component {
 			return;
 		}
 		let loadNext = e.target.scrollTop + e.target.offsetHeight == e.target.scrollHeight;
-		console.log(loadNext);
 		if (loadNext) {
 			let page = Math.ceil(this.props.taskList.length / PAGE_SIZE.task) + 1;
-			console.log(`page: ${page}`);
 			this.props.loadTasks(apiUrls.task + `?page=${page}&project=${this.props.projectId}`, true);
 		}
 	}

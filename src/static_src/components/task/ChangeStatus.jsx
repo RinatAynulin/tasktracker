@@ -50,8 +50,6 @@ class ChangeStatus extends React.Component {
 }
 
 const mapStateToProps = ({ tasks, auth }, ownProps) => {
-        console.log('own props');
-        console.log(ownProps);
         return {
             userId: auth.user.user.id,
             authorId: tasks.tasks[ownProps.taskId].author,

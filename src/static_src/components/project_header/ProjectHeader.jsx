@@ -33,7 +33,7 @@ const mapStateToProps = ({ tasks, projects }) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {}
+const mapDispatchToProps = (dispatch) => {return {};}
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectHeader);

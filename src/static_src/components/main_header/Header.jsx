@@ -21,7 +21,6 @@ class Header extends React.Component {
 	};
 
 	render() {
-		console.log(this.props.currentUser);
 		const currentUser = (this.props.currentUser.first_name) ? <p> {this.props.currentUser.first_name + ' ' + this.props.currentUser.last_name} </p> : <p>Anonymous</p>;
 		return (
 			<div className="header">
@@ -46,11 +45,15 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-    return {
-        currentUser: auth.user.user,
-    }
+	if (auth.user.user)
+	    return {
+	        currentUser: auth.user.user,
+	    };
+	else {
+		return {};
+	}
 }
 
-const mapDispatchToProps = () => {};
+const mapDispatchToProps = () => {return {};};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

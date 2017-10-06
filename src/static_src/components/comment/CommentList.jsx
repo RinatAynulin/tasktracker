@@ -26,7 +26,7 @@ class CommentList extends React.Component {
             return;
         }
         let loadNext = e.target.scrollTop + e.target.offsetHeight == e.target.scrollHeight;
-        console.log(loadNext);
+
         if (loadNext) {
             let page = Math.ceil(this.props.commentList.length / PAGE_SIZE.comment) + 1;
             this.props.loadComments(this.props.taskId, page, true);

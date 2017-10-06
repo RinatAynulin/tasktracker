@@ -65,7 +65,6 @@ export const addTask = (body) => {
                             (json) => {
                                 json = {tasks: json};
                                 const normalizedData = normalize(json, [task]);
-                                console.log(normalizedData);
                                 delete json.results;
                                 return Object.assign({}, json, normalizedData);
                             },
@@ -98,7 +97,6 @@ export const changeStatus = (taskId, body) => {
                             (json) => {
                                 json = {tasks: json};
                                 const normalizedData = normalize(json, [task]);
-                                console.log(normalizedData);
                                 delete json.results;
                                 return Object.assign({}, json, normalizedData);
                             },

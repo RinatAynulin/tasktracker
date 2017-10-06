@@ -28,8 +28,6 @@ export default function tasks(store = initialState, action) {
             });
         }
         case SUCCESS_TASK_LOADING: {
-            console.log(action.payload);
-            console.log(`addTasks? ${action.payload.addTasks}`);
             if (action.payload.addTasks) {
                 return update(newStore, {
                     isLoading: { $set: false },
