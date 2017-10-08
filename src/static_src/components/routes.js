@@ -2,19 +2,19 @@ import App from './App';
 import LoginPage from './login/LoginPage';
 
 const routes = {
-	component: App,
+    component: App,
 
-	childRoutes: [
-		{
-			path: '/', 
-			component: LoginPage,
-		}, 
+    childRoutes: [
+        {
+            path: '/', 
+            component: LoginPage,
+        }, 
 
-		// {
-		// 	path: '/login',
-		// 	component: 
-		// }
-	],
+        // {
+        //     path: '/login',
+        //     component: 
+        // }
+    ],
 };
 
 export default routes;

@@ -3,7 +3,7 @@ import { schema } from 'normalizr';
 export const user = new schema.Entity('users');
 
 export const project = new schema.Entity('projects', {
-	author: user,
+    author: user,
 });
 
 export const task = new schema.Entity('tasks', {
@@ -13,6 +13,6 @@ export const task = new schema.Entity('tasks', {
 });
 
 export const comment = new schema.Entity('comments', {
-	author: user,
-	task: task,
+    author: user,
+    task: task,
 });

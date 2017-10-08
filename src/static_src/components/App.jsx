@@ -24,55 +24,55 @@ import './../styles.css';
 
 class App extends React.Component {
 
-	static propTypes = {
-		server: PropTypes.bool,
-		currentUser: PropTypes.func,
-		redirectToLogin: PropTypes.func,
-		isLoading: PropTypes.bool,
-		addToPromises: PropTypes.func,
-	};
+    static propTypes = {
+        server: PropTypes.bool,
+        currentUser: PropTypes.func,
+        redirectToLogin: PropTypes.func,
+        isLoading: PropTypes.bool,
+        addToPromises: PropTypes.func,
+    };
 
-	static defaultProps = {
+    static defaultProps = {
         server: false,
         addToPromises: () => {},
     };
 
-	state = {
-		projectList: [],
-		currentUser: {},
-		isLoading: false
-	}; 
+    state = {
+        projectList: [],
+        currentUser: {},
+        isLoading: false
+    }; 
 
-	componentDidMount() {
-		this.setState({isLoading: true});
-		this.props.serverFlag();
-	}
-	
-	componentWillMount() {
-		this.props.currentUser();
-	}
+    componentDidMount() {
+        this.setState({isLoading: true});
+        this.props.serverFlag();
+    }
+    
+    componentWillMount() {
+        this.props.currentUser();
+    }
 
-	render() {
-		const MyProjectPage = (props) => {
-			return (<ProjectPage server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
-		}
+    render() {
+        const MyProjectPage = (props) => {
+            return (<ProjectPage server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
+        }
 
-		const MyTaskBoard = (props) => {
-			return (<TaskBoard {...props} server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
-		}
+        const MyTaskBoard = (props) => {
+            return (<TaskBoard {...props} server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
+        }
 
-		return (
-			<div className="root-div">
-				<Header currentUser={this.state.currentUser}/>
+        return (
+            <div className="root-div">
+                <Header currentUser={this.state.currentUser}/>
                 <Switch>
                     <PrivateRoute path="/tasklist/:projectId" component={ MyTaskBoard } />
                     <PrivateRoute exact path="/" component={ MyProjectPage }/>
                     <Route exact path="/login/" component= { LoginPage }/>
                     <Route exact path="/logout/" component = { Logout }/>
                 </Switch>
-			</div>
-			);
-	}
+            </div>
+            );
+    }
 }
 
 const mapStateToProps = ({ auth, SSR }) => {
@@ -85,8 +85,8 @@ const mapStateToProps = ({ auth, SSR }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return Object.assign({
-    	redirectToLogin: () => dispatch(push('/login')),
-    	redirectToProjects: () => dispatch(push('/projects')),
+        redirectToLogin: () => dispatch(push('/login')),
+        redirectToProjects: () => dispatch(push('/projects')),
     }, bindActionCreators({ currentUser, serverFlag }, dispatch));
 };
 

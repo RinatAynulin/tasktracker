@@ -9,22 +9,22 @@ import taskModal from './taskModal';
 import SSR from './SSR';
 
 const appReducer = combineReducers({
-	routerReducer,
-	tasks,
-	projects,
-	users,
-	comments,
-	taskModal,
-	auth, 
-	SSR
+    routerReducer,
+    tasks,
+    projects,
+    users,
+    comments,
+    taskModal,
+    auth, 
+    SSR
 });
 
 const rootReducer = (state, action) => {
-	if (action.type === 'LOGOUT') {
-		state = undefined;
-		// localStorage.removeItem('auth-token');
-	}
-	return appReducer(state, action)
+    if (action.type === 'LOGOUT') {
+        state = undefined;
+        // localStorage.removeItem('auth-token');
+    }
+    return appReducer(state, action)
 };
 
 export default rootReducer;

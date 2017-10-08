@@ -20,62 +20,62 @@ import './../../styles.css';
 
 class TaskBoard extends React.Component {
 
-	static propTypes = {
-		isLoading: PropTypes.bool,
-		loadTasks: PropTypes.func.isRequired,
-		selectedProject: PropTypes.number,
-		server: PropTypes.bool,
-		addToPromises: PropTypes.func,
-	};
+    static propTypes = {
+        isLoading: PropTypes.bool,
+        loadTasks: PropTypes.func.isRequired,
+        selectedProject: PropTypes.number,
+        server: PropTypes.bool,
+        addToPromises: PropTypes.func,
+    };
 
-	static defaultProps = {
-		server: false,
-		addToPromises: () => {},
-	};
+    static defaultProps = {
+        server: false,
+        addToPromises: () => {},
+    };
 
-	constructor(props) {
-		super(props);
-		if (SERVER) {
-			// this.props.addToPromises(this.props.selectProject(this.props.match.params.projectId));
-		}
-	}
+    constructor(props) {
+        super(props);
+        if (SERVER) {
+            // this.props.addToPromises(this.props.selectProject(this.props.match.params.projectId));
+        }
+    }
 
-	componentDidMount() {
-		if (!this.props.isServerRendering) {
-			this.props.selectProject(this.props.match.params.projectId);
-		}
-	}
+    componentDidMount() {
+        if (!this.props.isServerRendering) {
+            this.props.selectProject(this.props.match.params.projectId);
+        }
+    }
 
-	render() {
-		// if (this.props.isLoading) {
-		// 	return <div className="task-board">Loading...</div>;
-		// }
-		if (this.props.selectedProject <= 0) {
-			return <div className="task-board">Select project, pls</div>;
-		}
-		console.log(Object.getOwnPropertyNames(statusMapping));
-		const taskLists = Object.getOwnPropertyNames(statusMapping).map(
-			(listName) => (
-				<div className="task-board-row">
-					<TaskList key={statusMapping[listName]} listName={listName} addToPromises={this.props.addToPromises}/>
-				</div>
-				)
-			);
-		return (
-				<div>
-					<ProjectHeader/>
-					<ReactModal className="modal-content" isOpen={this.props.showModal} onRequestClose={this.props.closeModal} contentLabel="Minimal Modal Example">
+    render() {
+        // if (this.props.isLoading) {
+        //  return <div className="task-board">Loading...</div>;
+        // }
+        if (this.props.selectedProject <= 0) {
+            return <div className="task-board">Select project, pls</div>;
+        }
+        console.log(Object.getOwnPropertyNames(statusMapping));
+        const taskLists = Object.getOwnPropertyNames(statusMapping).map(
+            (listName) => (
+                <div className="task-board-row">
+                    <TaskList key={statusMapping[listName]} listName={listName} addToPromises={this.props.addToPromises}/>
+                </div>
+                )
+            );
+        return (
+                <div>
+                    <ProjectHeader/>
+                    <ReactModal className="modal-content" isOpen={this.props.showModal} onRequestClose={this.props.closeModal} contentLabel="Minimal Modal Example">
 
-                      	  <Task task={this.props.selectedTask}/>
-                      	  <CommentList/>
+                          <Task task={this.props.selectedTask}/>
+                          <CommentList/>
 
                     </ReactModal>
-					<div className="task-board">
-							{taskLists}
-					</div>
-				</div>
-			);
-	}
+                    <div className="task-board">
+                            {taskLists}
+                    </div>
+                </div>
+            );
+    }
 }
 
 const mapStateToProps = ({ SSR, tasks, projects, taskModal }) => {

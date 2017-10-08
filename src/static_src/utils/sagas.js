@@ -5,7 +5,7 @@
 
 // function* fetchUser(action) {
 //   try {
-//   	  console.log('fetchUser');
+//         console.log('fetchUser');
 //       const user = yield call(currentUser);
 //       yield put({type: "USER_FETCH_SUCCEEDED", user: user});
 //    } catch (e) {
@@ -15,9 +15,9 @@
 // }
 
 // function* fetchUserSaga() {
-// 	console.log('fetchUserSaga');
-// 	console.log(SUCCESS_LOGIN);
-// 	while (true) {
+//     console.log('fetchUserSaga');
+//     console.log(SUCCESS_LOGIN);
+//     while (true) {
 //   yield takeEvery(SUCCESS_LOGIN, fetchUser);
 // }
 // }

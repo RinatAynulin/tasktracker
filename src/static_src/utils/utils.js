@@ -1,3 +1,3 @@
 // export const getToken = () => {
-// 	return 'Token ' + localStorage.getItem('auth-token');
+//     return 'Token ' + localStorage.getItem('auth-token');
 // }

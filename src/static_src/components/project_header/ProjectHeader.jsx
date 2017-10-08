@@ -6,25 +6,25 @@ import Project from './../project/Project';
 import './../../styles.css';
 
 class ProjectHeader extends React.Component {
-	static propTypes = {
-		project: PropTypes.shape(Project.PropTypes),
-	};
+    static propTypes = {
+        project: PropTypes.shape(Project.PropTypes),
+    };
 
-	static defaultProps = {
-		project: {},
-	};
+    static defaultProps = {
+        project: {},
+    };
 
-	render() {
-		let projectName = '';
-		if (this.props.project) {
-			projectName = this.props.project.name;
-		}
-		return (
-			<div className="project-header">
-				<a className="project-header__name"> {projectName} </a>
-			</div>
-			);
-	}
+    render() {
+        let projectName = '';
+        if (this.props.project) {
+            projectName = this.props.project.name;
+        }
+        return (
+            <div className="project-header">
+                <a className="project-header__name"> {projectName} </a>
+            </div>
+            );
+    }
 }
 
 const mapStateToProps = ({ tasks, projects }) => {
