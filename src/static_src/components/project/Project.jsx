@@ -23,16 +23,12 @@ class Project extends React.Component {
         created_at: '',
     }
 
-    onClick = (e) => {
-        this.props.selectProject(this.props.id);
-    }
-
     render() {
         let link = `/taskList/${this.props.id}`;
         return (
             <div className="project">
                 <div className="project__content">
-                    <Link to={link} onClick={ this.onClick }>{ this.props.name }</Link>
+                    <Link to={link} >{ this.props.name }</Link>
                 </div>
             </div>
         );

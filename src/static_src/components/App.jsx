@@ -57,6 +57,10 @@ class App extends React.Component {
 			return (<ProjectPage server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
 		}
 
+		const MyTaskBoard = (props) => {
+			return (<TaskBoard server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
+		}
+
 		return (
 			<div className="root-div">
 				<Header currentUser={this.state.currentUser}/>

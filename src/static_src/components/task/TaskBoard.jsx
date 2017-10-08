@@ -14,10 +14,9 @@ import { loadTasks } from './../../actions/tasks';
 import { selectProject } from './../../actions/projects';
 
 import apiUrls from './../../constants/apiUrls';
+import statusMapping from './../../constants/statusMapping';
 
 import './../../styles.css';
-
-const listNames = ['New', 'In progress', 'Done'];
 
 class TaskBoard extends React.Component {
 
@@ -33,7 +32,7 @@ class TaskBoard extends React.Component {
 
 	componentWillMount() {
 		this.props.selectProject(this.props.match.params.projectId);
-		this.props.loadTasks(apiUrls.task + `?project=${this.props.match.params.projectId}`, false);
+		// this.props.loadTasks(apiUrls.task + `?project=${this.props.match.params.projectId}`, false);
 	}
 
 	render() {
@@ -43,10 +42,10 @@ class TaskBoard extends React.Component {
 		if (this.props.selectedProject <= 0) {
 			return <div className="task-board">Select project, pls</div>;
 		}
-		const taskLists = listNames.map(
-			(listName, i) => (
+		const taskLists = Object.getOwnPropertyNames(statusMapping).map(
+			(listName) => (
 				<div className="task-board-row">
-					<TaskList key={i} listName={listName}/>
+					<TaskList key={statusMapping[listName]} listName={listName}/>
 				</div>
 				)
 			);

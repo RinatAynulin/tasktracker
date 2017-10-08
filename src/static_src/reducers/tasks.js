@@ -2,7 +2,7 @@ import update from 'react-addons-update';
 import { START_TASK_LOADING, SUCCESS_TASK_LOADING, ERROR_TASK_LOADING, 
         START_ADD_TASK, SUCCESS_ADD_TASK, ERROR_ADD_TASK,
         START_CHANGE_STATUS, SUCCESS_CHANGE_STATUS, ERROR_CHANGE_STATUS} from './../actions/tasks';
-
+import { SELECT_PROJECT } from './../actions/projects';
 const initialState = {
     taskList: [],
     tasks: {},
@@ -29,9 +29,13 @@ export default function tasks(store = initialState, action) {
         }
         case SUCCESS_TASK_LOADING: {
             if (action.payload.addTasks) {
+                console.log(store.taskList);
+                let tasksToAdd = action.payload.result.filter(e => {
+                    return !store.taskList.includes(e)
+                });
                 return update(newStore, {
                     isLoading: { $set: false },
-                    taskList: { $push: action.payload.result },
+                    taskList: { $push: tasksToAdd },
                 });
             } else {
                 return update(newStore, {
@@ -59,6 +63,11 @@ export default function tasks(store = initialState, action) {
         case ERROR_ADD_TASK: {
             return update(newStore, {
                 form: {isLoading: { $set: false }},
+            });
+        }
+        case SELECT_PROJECT: {
+            return update(newStore, {
+                taskList: { $set: [] },
             });
         }
         default:

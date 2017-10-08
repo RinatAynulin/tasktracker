@@ -25,14 +25,21 @@ class TaskList extends React.Component {
 		tasks: [],
 	}
 
+	componentWillMount() {
+		console.log('component will mount');
+		this.props.loadTasks(
+			apiUrls.task + `?project=${this.props.projectId}&status=${this.props.status}`, 
+			true);
+	}
+
 	onScroll = (e) => {
 		if (this.props.isLoading) {
 			return;
 		}
 		let loadNext = e.target.scrollTop + e.target.offsetHeight == e.target.scrollHeight;
 		if (loadNext) {
-			let page = Math.ceil(this.props.taskList.length / PAGE_SIZE.task) + 1;
-			this.props.loadTasks(apiUrls.task + `?page=${page}&project=${this.props.projectId}`, true);
+			let page = Math.floor(this.props.length / PAGE_SIZE.task) + 1;
+			this.props.loadTasks(apiUrls.task + `?page=${page}&project=${this.props.projectId}&status=${this.props.status}`, true);
 		}
 	}
 
@@ -69,12 +76,14 @@ const mapStateToProps = ({ tasks, projects }, ownProps) => {
 					taskList.push(task.id);
 				}
 			});
+		const length = Object.getOwnPropertyNames(tasksToShow).length;
 		return {
 			listName: ownProps.listName, 
 			tasks: tasksToShow,
 			taskList,
 			projectId: projects.selectedProject,
 			status,
+			length,
 		};
 	// }
 };
