@@ -1,4 +1,5 @@
 node_modules/
 static/build/
+static/server/
 ../.DS_Store
 ../todo.txt
