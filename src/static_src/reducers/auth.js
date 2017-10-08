@@ -2,20 +2,20 @@ import update from 'react-addons-update';
 import { push } from 'react-router-redux';
 
 import { START_LOGIN, SUCCESS_LOGIN, ERROR_LOGIN, START_CURRENT_USER_LOADING,
-    SUCCESS_CURRENT_USER_LOADING, ERROR_CURRENT_USER_LOADING, LOGOUT } from './../actions/auth';
+    SUCCESS_CURRENT_USER_LOADING, ERROR_CURRENT_USER_LOADING, START_LOGOUT } from './../actions/auth';
 
 const getInitialState = () => {
-    const token = localStorage.getItem('auth-token');
-    let isAuthenticated = false;
-    if (token) {
-        isAuthenticated = true;
-    } // fixme 
-    const authentication = {isAuthenticated, token}
+    // const token = localStorage.getItem('auth-token');
+    // let isAuthenticated = false;
+    // if (token) {
+    //     isAuthenticated = true;
+    // } // fixme 
+    // const authentication = {isAuthenticated, token}
 
     return {
         user: {user: {}, isLoading: false,},
         isLoading: false,
-        authentication
+        // authentication
     };
 }
 
@@ -29,11 +29,9 @@ export default function auth(store = getInitialState(), action) {
             });
         }
         case SUCCESS_LOGIN: {
-            const token = action.payload;
-            localStorage.setItem('auth-token', token);
+            // localStorage.setItem('auth-token', token);
 
             return update(newStore, {
-                authentication: { $set: { isAuthenticated: true, token }},
                 isLoading: { $set: false },
             });
         }

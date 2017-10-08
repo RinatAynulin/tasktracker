@@ -110,6 +110,10 @@
 	max-height: 60vh;
 }
 
+.project-page {
+	margin: 10px;
+}
+
 .root-div {
 	background-color: #FFD735;
 	min-height: 100vh;

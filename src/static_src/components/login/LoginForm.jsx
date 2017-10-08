@@ -10,7 +10,6 @@ import { login, currentUser } from './../../actions/auth';
 class LoginForm extends React.Component {
     static propTypes = {
         isLoading: PropTypes.bool,
-        isAuthenticated: PropTypes.bool,
         redirect: PropTypes.func,
         login: PropTypes.func,
     };
@@ -34,16 +33,14 @@ class LoginForm extends React.Component {
 
         console.log(`login request with body ${body}`);
 
-        this.props.login(body).then(() => this.props.currentUser());
+        this.props.login(body).then(() => 
+            this.props.currentUser().then(() => 
+                this.props.redirect()));
     }
 
     render() {
         if (this.props.isLoading) {
             return (<p> Logging in...</p>);
-        }
-
-        if (this.props.isAuthenticated) {
-            this.props.redirect();
         }
 
         return (
@@ -67,14 +64,14 @@ class LoginForm extends React.Component {
 const mapStateToProps = ({ auth }) => {
         return {
             isLoading: auth.isLoading,
-            isAuthenticated: auth.authentication.isAuthenticated,
+            // isAuthenticated: auth.authentication.isAuthenticated,
         };
     // }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return Object.assign({}, bindActionCreators({ login, currentUser }, dispatch), 
-        {redirect: () => (dispatch(push('/projects')))});
+        {redirect: () => (dispatch(push('/')))});
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

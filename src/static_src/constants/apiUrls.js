@@ -5,9 +5,10 @@ export const PAGE_SIZE = {
 };
 
 export default {
-	task: '/api/tasks/',
-	project: '/api/projects/',
-	comment: '/api/comment/',
-	currentUser: '/api/users/current/',
-	login: '/api/token-auth/'
+	task: SERVER_URL + 'api/tasks/',
+	project: SERVER_URL + 'api/projects/',
+	comment: SERVER_URL + 'api/comment/',
+	currentUser: SERVER_URL + 'api/users/current/',
+	login: SERVER_URL + 'api/token-auth/',
+	logout: SERVER_URL + 'api/logout/',
 }

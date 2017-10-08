@@ -13,15 +13,16 @@ class ProjectList extends React.Component {
 	static propTypes = {
 		isLoading: PropTypes.bool,
 		projectList: PropTypes.arrayOf(PropTypes.number),
-		size: PropTypes.number,
-		previous: PropTypes.string,
-		next: PropTypes.string,
 		loadProjects: PropTypes.func.isRequired,
+		server: PropTypes.bool,
+		addToPromises: PropTypes.func,
 	};
 
 	static defaultProps = {
 		isLoading: false,
 		projectList: [],
+		server: false,
+		addToPromises: () => {},
 	};
 
 
@@ -44,8 +45,17 @@ class ProjectList extends React.Component {
 		this.props.loadProjects(page, true);
 	}
 
+	constructor(props) {
+		super(props);
+		if (SERVER) {
+			this.props.addToPromises(this.props.loadProjects(1, false));
+		}
+	}
+
 	componentDidMount() {
-		this.props.loadProjects(1, false);
+		if (!this.props.isServerRendering) {
+			this.props.loadProjects(1, false);
+		}
 	}
 
 	render() {
@@ -67,13 +77,11 @@ class ProjectList extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ projects }) => {
+const mapStateToProps = ({ SSR, projects }) => {
     return {
         isLoading: projects.isLoading,
         projectList: projects.projectList,
-        size: projects.size,
-        previous: projects.previous,
-        next: projects.next,
+        isServerRendering: SSR.serverRendering,
     }
 }
 

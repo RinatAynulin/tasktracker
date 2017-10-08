@@ -14,7 +14,7 @@ class ProjectForm extends React.Component {
     };
 
     state = {
-        name,
+        name: '',
     };
 
     onChange = (e) => {
@@ -29,7 +29,6 @@ class ProjectForm extends React.Component {
 
         const body = JSON.stringify(this.state);
 
-        console.log(`login request with body ${body}`);
         this.props.addProject(body);
     }
 

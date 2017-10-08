@@ -2,7 +2,6 @@ import { CALL_API, getJSON } from 'redux-api-middleware';
 import { normalize } from 'normalizr';
 
 import { comment } from './../utils/schemas';
-import { getToken } from './../utils/utils';
 import apiUrls from './../constants/apiUrls';
 
 export const START_COMMENT_LOADING = 'START_COMMENT_LOADING';
@@ -20,7 +19,6 @@ export const loadComments = (taskId, page, addComments) => {
             credentials: 'include',
             endpoint: `${apiUrls.comment}?task=${taskId}&page=${page}`,
             method: 'GET',
-            headers: { Authorization: getToken() },
             types: [
                 START_COMMENT_LOADING,
                 {
@@ -50,7 +48,6 @@ export const addComment = (body) => {
             method: 'POST',
             body,
             headers: { 
-                'Authorization': getToken(),
                 'Content-type': 'application/json' 
             },
             types: [

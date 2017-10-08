@@ -2,7 +2,6 @@ import { CALL_API, getJSON } from 'redux-api-middleware';
 import { normalize } from 'normalizr';
 
 import { project } from './../utils/schemas';
-import { getToken } from './../utils/utils';
 import apiUrls from './../constants/apiUrls';
 
 export const START_PROJECT_LOADING = 'START_PROJECT_LOADING';
@@ -21,7 +20,6 @@ export const loadProjects = (page, addProjects) => {
             credentials: 'include',
             endpoint: `${apiUrls.project}?page=${page}`,
             method: 'GET',
-            headers: { Authorization: getToken() },
             types: [
                 START_PROJECT_LOADING,
                 {
@@ -51,7 +49,6 @@ export const addProject = (body) => {
             method: 'POST',
             body,
             headers: { 
-                'Authorization': getToken(),
                 'Content-type': 'application/json' 
             },
             types: [

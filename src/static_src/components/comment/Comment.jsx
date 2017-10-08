@@ -21,7 +21,6 @@ class Comment extends React.Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return (
 				<div className="comment">
 					<div className="comment__header">

@@ -6,6 +6,7 @@ import auth from './auth';
 import users from './users';
 import comments from './comments';
 import taskModal from './taskModal';
+import SSR from './SSR';
 
 const appReducer = combineReducers({
 	routerReducer,
@@ -14,13 +15,14 @@ const appReducer = combineReducers({
 	users,
 	comments,
 	taskModal,
-	auth
+	auth, 
+	SSR
 });
 
 const rootReducer = (state, action) => {
 	if (action.type === 'LOGOUT') {
 		state = undefined;
-		localStorage.removeItem('auth-token');
+		// localStorage.removeItem('auth-token');
 	}
 	return appReducer(state, action)
 };

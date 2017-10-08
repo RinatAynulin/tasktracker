@@ -2,7 +2,6 @@ import { CALL_API, getJSON } from 'redux-api-middleware';
 import { normalize } from 'normalizr';
 
 import { task } from './../utils/schemas';
-import { getToken } from './../utils/utils';
 
 export const START_TASK_LOADING = 'START_TASK_LOADING';
 export const SUCCESS_TASK_LOADING = 'SUCCESS_TASK_LOADING';
@@ -24,7 +23,6 @@ export const loadTasks = (url, addTasks) => {
             credentials: 'include',
             endpoint: url,
             method: 'GET',
-            headers: {Authorization: getToken()},
             types: [
                 START_TASK_LOADING,
                 {
@@ -53,7 +51,6 @@ export const addTask = (body) => {
             method: 'POST',
             body,
             headers: { 
-                'Authorization': getToken(),
                 'Content-type': 'application/json' 
             },
             types: [
@@ -85,7 +82,6 @@ export const changeStatus = (taskId, body) => {
             method: 'PUT',
             body,
             headers: { 
-                'Authorization': getToken(),
                 'Content-type': 'application/json' 
             },
             types: [
