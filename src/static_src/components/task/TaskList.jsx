@@ -18,18 +18,31 @@ class TaskList extends React.Component {
 	static propTypes = {
 		listName: PropTypes.string,
 		tasks: PropTypes.arrayOf(PropTypes.shape(Task.propTypes)),
+		addToPromises: PropTypes.func,
 	}; 
 
 	static defaultProps = {
 		listName: '',
 		tasks: [],
+		addToPromises: () => {},
 	}
 
-	componentWillMount() {
-		console.log('component will mount');
-		this.props.loadTasks(
+	constructor(props) {
+		super(props);
+		if (SERVER) {
+			this.props.addToPromises(this.props.loadTasks(
 			apiUrls.task + `?project=${this.props.projectId}&status=${this.props.status}`, 
-			true);
+			true));
+		}
+	}
+
+	componentDidMount() {
+		if (!this.props.isServerRendering) {
+			console.log('load tasks...');
+			this.props.loadTasks(
+				apiUrls.task + `?project=${this.props.projectId}&status=${this.props.status}`, 
+				true);
+		}
 	}
 
 	onScroll = (e) => {
@@ -64,7 +77,7 @@ class TaskList extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ tasks, projects }, ownProps) => {
+const mapStateToProps = ({ tasks, projects, SSR}, ownProps) => {
 		const tasksToShow = [];
 		const taskList = []; // ids
 		const status = statusMapping[ownProps.listName];
@@ -84,6 +97,7 @@ const mapStateToProps = ({ tasks, projects }, ownProps) => {
 			projectId: projects.selectedProject,
 			status,
 			length,
+			isServerRendering: SSR.isServerRendering,
 		};
 	// }
 };

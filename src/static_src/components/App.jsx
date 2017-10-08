@@ -58,14 +58,14 @@ class App extends React.Component {
 		}
 
 		const MyTaskBoard = (props) => {
-			return (<TaskBoard server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
+			return (<TaskBoard {...props} server={ this.props.server } addToPromises={ this.props.addToPromises }/>);
 		}
 
 		return (
 			<div className="root-div">
 				<Header currentUser={this.state.currentUser}/>
                 <Switch>
-                    <PrivateRoute path="/tasklist/:projectId" component={ TaskBoard } />
+                    <PrivateRoute path="/tasklist/:projectId" component={ MyTaskBoard } />
                     <PrivateRoute exact path="/" component={ MyProjectPage }/>
                     <Route exact path="/login/" component= { LoginPage }/>
                     <Route exact path="/logout/" component = { Logout }/>
@@ -75,9 +75,10 @@ class App extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, SSR }) => {
         return {
             isLoading: auth.user.isLoading,
+            isServerRendering: SSR.serverRendering,
         };
     // }
 };

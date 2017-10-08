@@ -14,8 +14,10 @@ class Logout extends React.Component {
     };
 
     componentWillMount() {
-        this.props.logout().then(() =>
-            this.props.redirectToLogin());
+        if (!this.props.isServerRendering) {
+            this.props.logout().then(() =>
+                this.props.redirectToLogin());
+        }
     }
 
     render() {
@@ -23,7 +25,7 @@ class Logout extends React.Component {
     }
 }
 
-const mapStateToProps = () => {return {}};
+const mapStateToProps = ({ SSR }) => {return {isServerRendering: SSR.serverRendering,}};
 
 const mapDispatchToProps = (dispatch) => {
     return ({

@@ -55,6 +55,7 @@ app.get('*', (req, res) => {
     const context = {};
     const resultServer = (value) => {
         for (const item of value) {
+            console.log(item);
             if (!item.payload || item.error){
                 res.redirect('/login/')
                 return;

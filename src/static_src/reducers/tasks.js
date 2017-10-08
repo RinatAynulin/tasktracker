@@ -29,7 +29,6 @@ export default function tasks(store = initialState, action) {
         }
         case SUCCESS_TASK_LOADING: {
             if (action.payload.addTasks) {
-                console.log(store.taskList);
                 let tasksToAdd = action.payload.result.filter(e => {
                     return !store.taskList.includes(e)
                 });

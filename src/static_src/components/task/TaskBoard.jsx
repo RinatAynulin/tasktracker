@@ -24,15 +24,26 @@ class TaskBoard extends React.Component {
 		isLoading: PropTypes.bool,
 		loadTasks: PropTypes.func.isRequired,
 		selectedProject: PropTypes.number,
+		server: PropTypes.bool,
+		addToPromises: PropTypes.func,
+	};
+
+	static defaultProps = {
+		server: false,
+		addToPromises: () => {},
 	};
 
 	constructor(props) {
 		super(props);
+		if (SERVER) {
+			// this.props.addToPromises(this.props.selectProject(this.props.match.params.projectId));
+		}
 	}
 
-	componentWillMount() {
-		this.props.selectProject(this.props.match.params.projectId);
-		// this.props.loadTasks(apiUrls.task + `?project=${this.props.match.params.projectId}`, false);
+	componentDidMount() {
+		if (!this.props.isServerRendering) {
+			this.props.selectProject(this.props.match.params.projectId);
+		}
 	}
 
 	render() {
@@ -42,10 +53,11 @@ class TaskBoard extends React.Component {
 		if (this.props.selectedProject <= 0) {
 			return <div className="task-board">Select project, pls</div>;
 		}
+		console.log(Object.getOwnPropertyNames(statusMapping));
 		const taskLists = Object.getOwnPropertyNames(statusMapping).map(
 			(listName) => (
 				<div className="task-board-row">
-					<TaskList key={statusMapping[listName]} listName={listName}/>
+					<TaskList key={statusMapping[listName]} listName={listName} addToPromises={this.props.addToPromises}/>
 				</div>
 				)
 			);
@@ -66,12 +78,13 @@ class TaskBoard extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ tasks, projects, taskModal }) => {
+const mapStateToProps = ({ SSR, tasks, projects, taskModal }) => {
     return {
         isLoading: tasks.isLoading,
         selectedProject: projects.selectedProject,
         showModal: taskModal.showModal,
         selectedTask: tasks.tasks[taskModal.selectedTask],
+        isServerRendering: SSR.serverRendering,
     }
 }
 
