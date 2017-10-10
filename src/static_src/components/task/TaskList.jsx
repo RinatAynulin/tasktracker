@@ -38,12 +38,12 @@ class TaskList extends React.Component {
 
     componentDidMount() {
         if (!this.props.isServerRendering) {
-            console.log('load tasks...');
             this.props.loadTasks(
                 apiUrls.task + `?project=${this.props.projectId}&status=${this.props.status}`, 
                 true);
         }
     }
+
 
     onScroll = (e) => {
         if (this.props.isLoading) {
@@ -97,7 +97,7 @@ const mapStateToProps = ({ tasks, projects, SSR}, ownProps) => {
             projectId: projects.selectedProject,
             status,
             length,
-            isServerRendering: SSR.isServerRendering,
+            isServerRendering: SSR.serverRendering,
         };
     // }
 };

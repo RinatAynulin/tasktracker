@@ -43,13 +43,22 @@ class App extends React.Component {
         isLoading: false
     }; 
 
+    constructor(props) {
+        super(props);
+        if (SERVER) {
+            this.props.addToPromises(this.props.currentUser());
+        }
+    }
+
     componentDidMount() {
         this.setState({isLoading: true});
         this.props.serverFlag();
     }
     
     componentWillMount() {
-        this.props.currentUser();
+        if (!this.props.isServerRendering) {
+            this.props.currentUser();
+        }
     }
 
     render() {
@@ -63,7 +72,7 @@ class App extends React.Component {
 
         return (
             <div className="root-div">
-                <Header currentUser={this.state.currentUser}/>
+                <Header/>
                 <Switch>
                     <PrivateRoute path="/tasklist/:projectId" component={ MyTaskBoard } />
                     <PrivateRoute exact path="/" component={ MyProjectPage }/>
