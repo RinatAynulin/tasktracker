@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Project from './../project/Project';
 import './../../styles.css';
 
-class ProjectHeader extends React.Component {
+export class ProjectHeader extends React.Component {
     static propTypes = {
         project: PropTypes.shape(Project.PropTypes),
     };

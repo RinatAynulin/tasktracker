@@ -3,12 +3,16 @@ import { SET_SSR_FLAG } from './../actions/serverFlag';
 
 
 const initialState = {
+    taskList: [],
+    tasks: {},
+    isLoading: false,
 };
+
 
 
 export default function SSR(store = initialState, action) {
     let newStore = store;
-    if ( SERVER ){
+    if ( typeof SERVER != 'undefined' && SERVER){
         newStore = {
             serverRendering: true,
         }
