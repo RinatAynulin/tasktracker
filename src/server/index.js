@@ -57,6 +57,9 @@ app.get('*', (req, res) => {
         for (const item of value) {
             console.log(item);
             if (!item.payload || item.error){
+                if (item.type && item.type == 'ERROR_CURRENT_USER_LOADING') {
+                    continue;
+                }
                 res.redirect('/login/')
                 return;
             }
